@@ -49,6 +49,35 @@ const userResetForgotPasswordValidator = () => {
   return [body("newPassword").notEmpty().withMessage("Password is required")];
 };
 
+const createProjectValidator = ()=>{
+
+  return[
+    body("name")
+    .notEmpty()
+    .withMessage("Name is required"),
+    body("description")
+    .optional()
+  ]
+}
+
+const addMemberToProjectValidator=()=>{
+  return [
+    body("email")
+    .trim()
+    .notEmpty()
+    .withMessage("email is required")
+    .isEmail()
+    .withMessage("Email is invalid"),
+    body("role")
+    .notEmpty()
+    .withMessage("role is required")
+    .isIn(AvailableUserRole)
+    .withMessage("Role is invalid"),
+
+  ]
+
+}
+
 
 
 export {
@@ -57,5 +86,7 @@ export {
   userChangeCurrentPasswordValidator,
   userForgotPasswordValidator,
   userResetForgotPasswordValidator,
+  createProjectValidator,
+  addMemberToProjectValidator,
   
 };
